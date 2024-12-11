@@ -22,24 +22,29 @@ final BudgetModalClass currentBudget;
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
+            backgroundColor: Colors.black,
             title: Text(
-              'Add Amount',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              'Update Budget',
+              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
+
                   controller: txtamount,
-                  decoration: InputDecoration(hintText: 'Amount'),
+
+                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
+                  decoration: InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white,),),
                 ),
                 TextField(
                   controller: txtcategory,
-                  decoration: InputDecoration(hintText: 'Category'),
+                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
+                  decoration: InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 Obx(
                       () => SwitchListTile(
-                    title: Text('Income'),
+                    title: Text('Income',style: TextStyle(color: Colors.white),),
                     value: controller.isIncome.value,
                     onChanged: (value) {
                       controller.checkIncome(value);
@@ -53,7 +58,7 @@ final BudgetModalClass currentBudget;
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('Cancel')),
+                  child: Text('Cancel',style: TextStyle(),)),
               TextButton(
                   onPressed: () {
                     int isIncome = controller.isIncome.value ? 1 : 0;
@@ -64,7 +69,7 @@ final BudgetModalClass currentBudget;
                     id: currentBudget.id!);
                     Get.back();
                   },
-                  child: Text('Add'))
+                  child: Text('Update'))
             ],
           ),
         );

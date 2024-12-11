@@ -24,8 +24,13 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black26,
         appBar: AppBar(
-          title: Text('Hi Avesh...',style: TextStyle(fontWeight: FontWeight.bold),),
+          backgroundColor: Colors.black26,
+          title: Text(
+            'Welcome Avesh...',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
@@ -35,28 +40,35 @@ class Homepage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                      gradient: controller.balance>0?LinearGradient(
-                        begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                        Colors.green.shade400,
-                        Colors.green.shade300,
-                        Colors.green.shade200,
-                        Colors.green.shade100,
-                        Colors.green.shade50,
-                        Colors.white
-                      ]):LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                        Colors.red.shade400,
-                        Colors.red.shade300,
-                        Colors.red.shade200,
-                        Colors.red.shade100,
-                        Colors.red.shade50,
-                        Colors.white
-                      ])),
+                      border: Border.all(
+                          color: controller.balance > 0
+                              ? Colors.green.shade200
+                              : Colors.red.shade200,
+                          width: 1.5),
+                      borderRadius: BorderRadius.circular(25),
+                      gradient: controller.balance > 0
+                          ? LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                  Colors.green.shade400,
+                                  Colors.green.shade300,
+                                  Colors.green.shade200,
+                                  Colors.green.shade100,
+                                  Colors.green.shade50,
+                                  Colors.white
+                                ])
+                          : LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                  Colors.red.shade400,
+                                  Colors.red.shade300,
+                                  Colors.red.shade200,
+                                  Colors.red.shade100,
+                                  Colors.red.shade50,
+                                  Colors.white
+                                ])),
                   child: BlurryContainer(
                     blur: 15,
                     height: 240,
@@ -74,9 +86,9 @@ class Homepage extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                         Text(
+                        Text(
                           "\$${controller.balance}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             letterSpacing: 1,
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -121,8 +133,8 @@ class Homepage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   Increment_Box(),
@@ -133,35 +145,39 @@ class Homepage extends StatelessWidget {
                 ],
               ),
             ),
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
+            ),
             Column(
               children: [
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CupertinoButton(
+                      ElevatedButton(
                           onPressed: () {
                             controller.fetchData();
                           },
-                          child: Text(
+                          child: const Text(
                             'All',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16),
                           )),
-                      CupertinoButton(
+                      ElevatedButton(
                           onPressed: () {
                             controller.fetchbyfiletr(1);
                           },
-                          child: Text(
+                          child: const Text(
                             'Income',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16),
                           )),
-                      CupertinoButton(
+                      ElevatedButton(
                           onPressed: () {
                             controller.fetchbyfiletr(0);
                           },
-                          child: Text(
+                          child: const Text(
                             'Expense',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 16),
@@ -170,6 +186,10 @@ class Homepage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
             ),
             Expanded(
               child: Obx(
@@ -180,11 +200,18 @@ class Homepage extends StatelessWidget {
                         ? Colors.green.shade200
                         : Colors.red.shade200,
                     child: ListTile(
-                      leading: Text(controller.budgetList[index].id.toString()),
+                      leading: CircleAvatar(
+
+                          child: Text(
+                        controller.budgetList[index].id.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 15),
+                      )),
                       title:
-                          Text(controller.budgetList[index].amount.toString()),
+                          Text(controller.budgetList[index].amount.toString(),     style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18),),
                       subtitle: Text(controller.budgetList[index].category! +
-                          " " "${controller.budgetList[index].date}"),
+                          "  "  "${controller.budgetList[index].date}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

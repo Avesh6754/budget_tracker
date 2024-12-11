@@ -65,13 +65,13 @@ class Homecontroller extends GetxController {
 
   Future<void> fetchbyfiletr(int isIncome) async {
 
-    List filterList = await Dbhelper.dbhelper.fetchDatafromFilter(isIncome);
-    budgetList.value = filterList
+    List data = await Dbhelper.dbhelper.fetchDatafromFilter(isIncome);
+    budgetList.value = data
         .map(
           (e) => BudgetModalClass.fromMap(e),
         )
         .toList();
-    await calculate();
+
   }
 
   Future<void> calculate() async {

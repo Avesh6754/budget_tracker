@@ -14,31 +14,36 @@ class Text_ButtonBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      backgroundColor: Colors.green.shade300,
       onPressed: () {
         txtamount.clear();
         txtcategory.clear();
         controller.isIncome.value=false;
         showDialog(
+
           context: context,
           builder: (context) => AlertDialog(
+            backgroundColor: Colors.black,
             title: Text(
-              'Add Amount',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              'Add Budget',
+              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: txtamount,
-                  decoration: InputDecoration(hintText: 'Amount'),
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 TextField(
                   controller: txtcategory,
-                  decoration: InputDecoration(hintText: 'Category'),
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 Obx(
                       () => SwitchListTile(
-                    title: Text('Income'),
+                    title: Text('Income',style: TextStyle(color: Colors.white),),
                     value: controller.isIncome.value,
                     onChanged: (value) {
                       controller.checkIncome(value);
@@ -62,12 +67,12 @@ class Text_ButtonBox extends StatelessWidget {
                         isIncome: isIncome);
                     Get.back();
                   },
-                  child: Text('Add'))
+                  child: Text('Add',))
             ],
           ),
         );
       },
-      child: Icon(Icons.add),
+      child: Icon(Icons.add,color: Colors.white,),
     );
   }
 }
