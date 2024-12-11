@@ -47,9 +47,18 @@ class Dbhelper {
   Future<void> deleteRecord(int id)
   async {
     Database? db=await database;
-    String query='''DELETE FROM budget WHERE id=$id''';
+    String query='''DELETE FROM budget WHERE id=?''';
     List argument=[id];
     await db!.rawDelete(query,argument);
+  }
+
+  Future<void> updateRecords(double amount,int isIncome,String date,String category,int id)
+  async {
+    Database? db=await database;
+    String query='''UPDATE budget SET amount=?,isIncome=?,date=?,category=? WHERE id=?''';
+    List argumnet=[amount,isIncome,date,category,id];
+    await db!.rawUpdate(query,argumnet);
+
   }
 }
 

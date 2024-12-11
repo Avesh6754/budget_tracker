@@ -18,7 +18,7 @@ class Homecontroller extends GetxController{
   Future<void> deleteData(int id)
   async {
    await Dbhelper.dbhelper.deleteRecord(id);
-   fetchData();
+   await fetchData();
   }
 void checkIncome(bool value)
 {
@@ -28,12 +28,18 @@ void checkIncome(bool value)
   async {
     await Dbhelper.dbhelper
         .insertRecords(amount, isIncome, DateTime.now().toString(), category);
-    fetchData();
+    await fetchData();
   }
 
   Future<void> fetchData()
   async {
     List data=await Dbhelper.dbhelper.fetchRecords();
     budgetList.value=data.map((e) => BudgetModalClass.fromMap(e),).toList();
+  }
+  Future<void> updateData({required double amount,required int isIncome,required category,int id})
+  async {
+    await Dbhelper.dbhelper
+        .updateRecords(amount, isIncome, DateTime.now().toString(), category,id);
+   await fetchData();
   }
 }
