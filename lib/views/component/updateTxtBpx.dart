@@ -1,18 +1,24 @@
+import 'package:budget_tracker/modal/budget_modal_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../homePage.dart';
-class Text_ButtonBox extends StatelessWidget {
-  const Text_ButtonBox({
+class Text_Update extends StatelessWidget {
+  const Text_Update({
     super.key,
+    required this.currentBudget,
   });
-
+final BudgetModalClass currentBudget;
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return IconButton(
       onPressed: () {
+        txtamount.text=currentBudget.amount.toString();
+        txtcategory.text=currentBudget.category!;
+        controller.isIncome.value=currentBudget.isIncome==1?true:false;
+
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -51,10 +57,11 @@ class Text_ButtonBox extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     int isIncome = controller.isIncome.value ? 1 : 0;
-                    controller.insertData(
+                    controller.updateData(
                         amount: double.parse(txtamount.text),
                         category: txtcategory.text,
-                        isIncome: isIncome);
+                        isIncome: isIncome,
+                    id: currentBudget.id!);
                     Get.back();
                   },
                   child: Text('Add'))
@@ -62,7 +69,7 @@ class Text_ButtonBox extends StatelessWidget {
           ),
         );
       },
-      child: Icon(Icons.add),
+      icon: Icon(Icons.edit),
     );
   }
 }

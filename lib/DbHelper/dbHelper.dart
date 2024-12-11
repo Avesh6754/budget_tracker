@@ -60,5 +60,13 @@ class Dbhelper {
     await db!.rawUpdate(query,argumnet);
 
   }
+  Future<List<Map<String, Object?>>> fetchDatafromFilter(int isIncome)
+  async {
+    Database? db=await database;
+    String query='''SELECT * FROM budget WHERE isIncome= ?''';
+    List args = [isIncome];
+    return await db!.rawQuery(query,args);
+  }
+
 }
 

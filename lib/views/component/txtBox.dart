@@ -15,6 +15,9 @@ class Text_ButtonBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
+        txtamount.clear();
+        txtcategory.clear();
+        controller.isIncome.value=false;
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

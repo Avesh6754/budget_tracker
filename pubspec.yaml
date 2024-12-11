@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   sqflite: any
   get: ^4.6.6
+  blurrycontainer: ^2.1.0
   path: any
 dev_dependencies:
   flutter_test:
