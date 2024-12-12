@@ -208,6 +208,7 @@ class Homepage extends StatelessWidget {
                               .deleteData(controller.budgetList[index].id!);
                         },
                         borderRadius: BorderRadius.circular(15),
+
                         flex: 1,
                         backgroundColor: Color(0xFFFE4A49),
                         foregroundColor: Colors.white,
