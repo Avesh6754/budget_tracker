@@ -24,7 +24,7 @@ class Text_ButtonBox extends StatelessWidget {
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: Colors.black,
-            title: Text(
+            title: const Text(
               'Add Budget',
               style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
             ),
@@ -33,17 +33,17 @@ class Text_ButtonBox extends StatelessWidget {
               children: [
                 TextField(
                   controller: txtamount,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white)),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 TextField(
                   controller: txtcategory,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 Obx(
                       () => SwitchListTile(
-                    title: Text('Income',style: TextStyle(color: Colors.white),),
+                    title: const Text('Income',style: TextStyle(color: Colors.white),),
                     value: controller.isIncome.value,
                     onChanged: (value) {
                       controller.checkIncome(value);
@@ -57,7 +57,7 @@ class Text_ButtonBox extends StatelessWidget {
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('Cancel')),
+                  child: const Text('Cancel')),
               TextButton(
                   onPressed: () {
                     int isIncome = controller.isIncome.value ? 1 : 0;
@@ -67,12 +67,12 @@ class Text_ButtonBox extends StatelessWidget {
                         isIncome: isIncome);
                     Get.back();
                   },
-                  child: Text('Add',))
+                  child: const Text('Add',))
             ],
           ),
         );
       },
-      child: Icon(Icons.add,color: Colors.white,),
+      child: const Icon(Icons.add,color: Colors.white,),
     );
   }
 }

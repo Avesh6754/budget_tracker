@@ -8,6 +8,7 @@ import 'package:budget_tracker/utils/global.dart';
 import 'package:budget_tracker/views/component/updateTxtBpx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 import 'component/decrementData.dart';
@@ -194,40 +195,73 @@ class Homepage extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => ListView.builder(
+                  
                   itemCount: controller.budgetList.length,
-                  itemBuilder: (context, index) => Card(
-                    color: controller.budgetList[index].isIncome == 1
-                        ? Colors.green.shade200
-                        : Colors.red.shade200,
-                    child: ListTile(
-                      leading: CircleAvatar(
+                  itemBuilder: (context, index) => Slidable(
+                 key: ValueKey(0),
+                    startActionPane: ActionPane(motion: ScrollMotion(),dismissible: DismissiblePane(onDismissed:() {
 
-                          child: Text(
-                        controller.budgetList[index].id.toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 15),
-                      )),
-                      title:
-                          Text(controller.budgetList[index].amount.toString(),     style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18),),
-                      subtitle: Text(controller.budgetList[index].category! +
-                          "  "  "${controller.budgetList[index].date}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text_Update(
-                              currentBudget: controller.budgetList[index]),
-                          IconButton(
-                            onPressed: () {
-                              controller
-                                  .deleteData(controller.budgetList[index].id!);
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              color: Colors.red,
+                    },),children: [
+                      SlidableAction(
+                        onPressed: (context) {
+                          controller
+                              .deleteData(controller.budgetList[index].id!);
+                        },
+                        borderRadius: BorderRadius.circular(15),
+                        flex: 1,
+                        backgroundColor: Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: 'Delete',
+                      ),
+                    ],),
+                    endActionPane: ActionPane(
+                      motion: ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: (context) {
+                          },
+                          backgroundColor: Colors.teal,
+                          foregroundColor: Colors.white,
+                          icon: Icons.edit,
+                          label: 'Edit',
+                        ),
+                      ],
+                    ),
+                    child: Card(
+                      color: controller.budgetList[index].isIncome == 1
+                          ? Colors.green.shade200
+                          : Colors.red.shade200,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                    
+                            child: Text(
+                          controller.budgetList[index].id.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 15),
+                        )),
+                        title:
+                            Text(controller.budgetList[index].amount.toString(),     style: const TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 18),),
+                        subtitle: Text(controller.budgetList[index].category! +
+                            "  "  "${controller.budgetList[index].date}",style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text_Update(
+                                currentBudget: controller.budgetList[index]),
+                            IconButton(
+                              onPressed: () {
+                                controller
+                                    .deleteData(controller.budgetList[index].id!);
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

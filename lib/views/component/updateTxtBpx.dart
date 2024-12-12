@@ -23,7 +23,7 @@ final BudgetModalClass currentBudget;
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: Colors.black,
-            title: Text(
+            title: const Text(
               'Update Budget',
               style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
             ),
@@ -34,17 +34,17 @@ final BudgetModalClass currentBudget;
 
                   controller: txtamount,
 
-                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
-                  decoration: InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white,),),
+                  style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
+                  decoration: const InputDecoration(hintText: 'Amount',hintStyle: TextStyle(color: Colors.white,),),
                 ),
                 TextField(
                   controller: txtcategory,
-                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
-                  decoration: InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
+                  style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),
+                  decoration: const InputDecoration(hintText: 'Category',hintStyle: TextStyle(color: Colors.white)),
                 ),
                 Obx(
                       () => SwitchListTile(
-                    title: Text('Income',style: TextStyle(color: Colors.white),),
+                    title: const Text('Income',style: TextStyle(color: Colors.white),),
                     value: controller.isIncome.value,
                     onChanged: (value) {
                       controller.checkIncome(value);
@@ -58,7 +58,7 @@ final BudgetModalClass currentBudget;
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('Cancel',style: TextStyle(),)),
+                  child: const Text('Cancel',style: TextStyle(),)),
               TextButton(
                   onPressed: () {
                     int isIncome = controller.isIncome.value ? 1 : 0;
@@ -69,12 +69,12 @@ final BudgetModalClass currentBudget;
                     id: currentBudget.id!);
                     Get.back();
                   },
-                  child: Text('Update'))
+                  child: const Text('Update'))
             ],
           ),
         );
       },
-      icon: Icon(Icons.edit),
+      icon: const Icon(Icons.edit),
     );
   }
 }
