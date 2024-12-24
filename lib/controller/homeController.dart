@@ -1,12 +1,16 @@
 import 'dart:ffi';
 
 import 'package:budget_tracker/DbHelper/dbHelper.dart';
+import 'package:budget_tracker/DbHelper/user_db_helper.dart';
 import 'package:budget_tracker/modal/budget_modal_class.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 
 class Homecontroller extends GetxController {
   RxList<BudgetModalClass> budgetList = <BudgetModalClass>[].obs;
+  var txtsearch=TextEditingController();
+
   RxBool isIncome = false.obs;
   RxDouble income = 0.0.obs;
   RxDouble balance = 0.0.obs;
@@ -17,6 +21,7 @@ class Homecontroller extends GetxController {
   void onInit() {
     // TODO: implement onInit
     Dbhelper.dbhelper.database;
+
     fetchData();
 
     super.onInit();
@@ -73,6 +78,16 @@ class Homecontroller extends GetxController {
         .toList();
 
   }
+  Future<void> fetchBySearch(String search)
+  async {
+    List data = await Dbhelper.dbhelper.filterBySeacrh(search);
+    budgetList.value = data
+        .map(
+          (e) => BudgetModalClass.fromMap(e),
+    )
+        .toList();
+  }
+
 
   Future<void> calculate() async {
     List data = await Dbhelper.dbhelper.fetchRecords();

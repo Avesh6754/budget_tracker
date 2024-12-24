@@ -5,11 +5,13 @@ import 'package:budget_tracker/DbHelper/dbHelper.dart';
 import 'package:budget_tracker/controller/homeController.dart';
 import 'package:budget_tracker/modal/budget_modal_class.dart';
 import 'package:budget_tracker/utils/global.dart';
+import 'package:budget_tracker/views/search_Page/searchPage.dart';
+import 'package:budget_tracker/views/user_Profile/component/edit_profile.dart';
+// import 'package:budget_tracker/views/user_Profile/user_Page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-
 
 import 'component/categoryFilter.dart';
 import 'component/decrementData.dart';
@@ -30,10 +32,38 @@ class Homepage extends StatelessWidget {
         backgroundColor: Colors.black26,
         appBar: AppBar(
           backgroundColor: Colors.black26,
-          title: Text(
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile(),));
+              },
+              child: const CircleAvatar(
+                backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/512/3135/3135715.png'),
+              ),
+            ),
+          ),
+          title: const Text(
             'Welcome Avesh...',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Searchpage(),
+                        ));
+                  },
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  )),
+            )
+          ],
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
@@ -166,7 +196,6 @@ class Homepage extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => ListView.builder(
-
                   itemCount: controller.budgetList.length,
                   itemBuilder: (context, index) => Card(
                     color: controller.budgetList[index].isIncome == 1
@@ -174,28 +203,37 @@ class Homepage extends StatelessWidget {
                         : Colors.red.shade200,
                     child: ListTile(
                       leading: CircleAvatar(
-
                           child: Text(
                         controller.budgetList[index].id.toString(),
                         style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 15),
                       )),
-                      title:
-                          Text(controller.budgetList[index].amount.toString(),     style: const TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18),),
-                      subtitle: Text(controller.budgetList[index].category! +
-                          "  "  "${controller.budgetList[index].date}",style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 15),),
+                      title: Text(
+                        controller.budgetList[index].amount.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 18),
+                      ),
+                      subtitle: Text(
+                        controller.budgetList[index].category! +
+                            "  " "${controller.budgetList[index].date}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 15),
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                        update_Text(context,controller.budgetList[index]),
-                          SizedBox(width: 10,)
-                         ,
-                         IconButton(onPressed: () {
-                           controller
-                               .deleteData(controller.budgetList[index].id!);
-                         }, icon: Icon(Icons.delete))
-                      ],),
+                          update_Text(context, controller.budgetList[index]),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                controller.deleteData(
+                                    controller.budgetList[index].id!);
+                              },
+                              icon: Icon(Icons.delete))
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -205,13 +243,4 @@ class Homepage extends StatelessWidget {
         ),
         floatingActionButton: Text_ButtonBox());
   }
-
-
-
-
-
-
 }
-
-
-

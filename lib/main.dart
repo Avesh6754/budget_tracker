@@ -1,4 +1,5 @@
 import 'package:budget_tracker/views/home/homePage.dart';
+import 'package:budget_tracker/views/search_Page/searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
